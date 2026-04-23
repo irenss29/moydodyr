@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>МойДодыр — Рекламный проект</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Яндекс Метрика: вставь свой номер счётчика вместо XXXXXXXX -->
+  <!--
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],
+    k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    ym(XXXXXXXX, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true });
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/XXXXXXXX" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  -->
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0f0f0f;
+      --grey-dark: #3a3a3a;
+      --grey-mid: #7a7a7a;
+      --grey-light: #e8e8e8;
+      --white: #ffffff;
+      --accent: #1a56db;
+      --accent-light: #e8f0fe;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+      height: 68px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--grey-light);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--black);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--grey-mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--black); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 60px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-line {
+      position: absolute;
+      top: 0; right: 0;
+      width: 45%;
+      height: 100%;
+      background: var(--accent-light);
+      clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 580px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin-bottom: 28px;
+    }
+
+    .hero-title span { color: var(--accent); }
+
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+
+    .hero-meta-row {
+      display: flex;
+      gap: 12px;
+      font-size: 0.9rem;
+    }
+
+    .hero-meta-label {
+      font-weight: 600;
+      color: var(--grey-mid);
+      min-width: 120px;
+    }
+
+    .hero-meta-value { color: var(--black); }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--black);
+      color: var(--white);
+      padding: 12px 24px;
+      border-radius: 2px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .hero-badge:hover { background: var(--accent); }
+
+    /* ── SECTIONS COMMON ── */
+    section {
+      padding: 100px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      color: var(--black);
+    }
+
+    .section-divider {
+      width: 40px;
+      height: 2px;
+      background: var(--accent);
+      margin-bottom: 48px;
+    }
+
+    /* ── VIDEO ── */
+    #video {
+      background: var(--black);
+      max-width: 100%;
+      padding: 100px 60px;
+    }
+
+    #video .inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    #video .section-label { color: #6b9bff; }
+    #video .section-title { color: var(--white); }
+    #video .section-divider { background: #6b9bff; }
+
+    .video-wrapper {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #1a1a1a;
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #2a2a2a;
+      position: relative;
+    }
+
+    .video-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      color: #555;
+    }
+
+    .video-placeholder-icon {
+      width: 72px;
+      height: 72px;
+      border: 2px solid #333;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-placeholder-icon::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-top: 14px solid transparent;
+      border-bottom: 14px solid transparent;
+      border-left: 22px solid #444;
+      margin-left: 4px;
+    }
+
+    .video-placeholder p {
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* замени video-placeholder на тег video или iframe */
+    /* пример:
+    <video controls style="width:100%;height:100%;object-fit:cover;">
+      <source src="moydodyr_ad.mp4" type="video/mp4">
+    </video>
+    */
+
+    /* ── AUDIENCE ── */
+    #audience { border-top: 1px solid var(--grey-light); }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--grey-light);
+      border: 1px solid var(--grey-light);
+      margin-top: 0;
+    }
+
+    .audience-card {
+      background: var(--white);
+      padding: 40px 32px;
+      transition: background 0.2s;
+    }
+
+    .audience-card:hover { background: var(--accent-light); }
+
+    .audience-card-icon {
+      font-size: 1.6rem;
+      margin-bottom: 16px;
+    }
+
+    .audience-card-title {
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey-mid);
+      margin-bottom: 10px;
+    }
+
+    .audience-card-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--black);
+      line-height: 1.4;
+    }
+
+    .pain-list {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .pain-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 24px;
+      border: 1px solid var(--grey-light);
+      border-radius: 2px;
+    }
+
+    .pain-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--grey-light);
+      font-weight: 700;
+      line-height: 1;
+      min-width: 28px;
+    }
+
+    .pain-text { font-size: 0.9rem; color: var(--grey-dark); line-height: 1.5; }
+    .pain-text strong { color: var(--black); display: block; margin-bottom: 4px; font-size: 0.92rem; }
+
+    /* ── PROMOTION ── */
+    #promotion { border-top: 1px solid var(--grey-light); }
+
+    .promo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .promo-card {
+      border: 1px solid var(--grey-light);
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .promo-card:hover { border-color: var(--accent); }
+
+    .promo-card-num {
+      position: absolute;
+      top: 24px; right: 28px;
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--grey-light);
+      line-height: 1;
+    }
+
+    .promo-card-tag {
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 2px;
+      margin-bottom: 16px;
+    }
+
+    .promo-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--black);
+    }
+
+    .promo-card-desc {
+      font-size: 0.88rem;
+      color: var(--grey-dark);
+      line-height: 1.7;
+    }
+
+    .promo-card ul {
+      margin-top: 14px;
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .promo-card ul li {
+      font-size: 0.86rem;
+      color: var(--grey-dark);
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .promo-card ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--grey-light);
+      padding: 40px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-left {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+    }
+
+    .footer-left span { color: var(--accent); }
+
+    .footer-right {
+      font-size: 0.8rem;
+      color: var(--grey-mid);
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      #hero { padding: 100px 24px 60px; }
+      .hero-bg-line { width: 100%; clip-path: none; opacity: 0.3; }
+      section { padding: 60px 24px; }
+      #video { padding: 60px 24px; }
+      .audience-grid { grid-template-columns: 1fr; }
+      .pain-list { grid-template-columns: 1fr; }
+      .promo-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 24px; }
+    }
+  </style>
+  
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108735008', 'ym');
+
+    ym(108735008, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108735008" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">Мой<span>Додыр</span></a>
+    <ul class="nav-links">
+      <li><a href="#hero">О проекте</a></li>
+      <li><a href="#video">Реклама</a></li>
+      <li><a href="#audience">Аудитория</a></li>
+      <li><a href="#promotion">Продвижение</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO / О ПРОЕКТЕ -->
+  <section id="hero">
+    <div class="hero-bg-line"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Учебный рекламный проект · 2026</p>
+      <h1 class="hero-title">Видеореклама<br>автомойки<br><span>«МойДодыр»</span></h1>
+      <div class="hero-meta">
+        <div class="hero-meta-row">
+          <span class="hero-meta-label">Студент</span>
+          <!-- ЗАМЕНИ НА СВОЁ ИМЯ -->
+          <span class="hero-meta-value">Шаповал Кирилл Александрович</span>
+        </div>
+        <div class="hero-meta-row">
+          <span class="hero-meta-label">Дисциплина</span>
+          <span class="hero-meta-value">Цифровые коммуникации / Теория и практика коммуникации</span>
+        </div>
+        <div class="hero-meta-row">
+          <span class="hero-meta-label">Цель проекта</span>
+          <span class="hero-meta-value">Разработка рекламного продукта и его продвижение в цифровой среде</span>
+        </div>
+        <div class="hero-meta-row">
+          <span class="hero-meta-label">Объект</span>
+          <span class="hero-meta-value">Автомойка «МойДодыр», г. Домодедово</span>
+        </div>
+        <div class="hero-meta-row">
+          <span class="hero-meta-label">Продукт</span>
+          <span class="hero-meta-value">Видеоролик 20–30 сек, сгенерирован с помощью ИИ</span>
+        </div>
+      </div>
+      <a href="#video" class="hero-badge">Смотреть рекламу →</a>
+    </div>
+  </section>
+
+  <!-- ВИДЕОРЕКЛАМА -->
+  <div id="video">
+    <div class="inner">
+      <p class="section-label fade-in">Рекламный продукт</p>
+      <h2 class="section-title fade-in">Видеореклама</h2>
+      <div class="section-divider fade-in"></div>
+
+      <div class="video-wrapper fade-in">
+        <!-- 
+          ВСТАВЬ СЮДА СВОЁ ВИДЕО.
+          Вариант 1 — файл рядом с index.html:
+          <video controls style="width:100%;height:100%;object-fit:cover;">
+            <source src="moydodyr.mp4" type="video/mp4">
+          </video>
+
+          Вариант 2 — YouTube (замени VIDEO_ID):
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/VIDEO_ID"
+            frameborder="0" allowfullscreen style="display:block;"></iframe>
+
+          Вариант 3 — VK Видео (замени oid и id):
+          <iframe src="https://vk.com/video_ext.php?oid=-XXXXXX&id=XXXXXX&hd=2"
+            width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+        -->
+        <video controls style="width:100%;height:100%;object-fit:cover;">
+          <source src="reklama.mp4" type="video/mp4">
+        </video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ЦЕЛЕВАЯ АУДИТОРИЯ -->
+  <section id="audience">
+    <p class="section-label fade-in">Кому адресована реклама</p>
+    <h2 class="section-title fade-in">Целевая аудитория</h2>
+    <div class="section-divider fade-in"></div>
+
+    <div class="audience-grid fade-in">
+      <div class="audience-card">
+        <div class="audience-card-icon">👤</div>
+        <div class="audience-card-title">Возраст</div>
+        <div class="audience-card-value">20–50 лет</div>
+      </div>
+      <div class="audience-card">
+        <div class="audience-card-icon">📍</div>
+        <div class="audience-card-title">География</div>
+        <div class="audience-card-value">Домодедово и Подмосковье, радиус 10 км</div>
+      </div>
+      <div class="audience-card">
+        <div class="audience-card-icon">💼</div>
+        <div class="audience-card-title">Занятость</div>
+        <div class="audience-card-value">Работающие, предприниматели, курьеры</div>
+      </div>
+      <div class="audience-card">
+        <div class="audience-card-icon">📱</div>
+        <div class="audience-card-title">Поведение онлайн</div>
+        <div class="audience-card-value">Ищут и записываются на услуги через смартфон</div>
+      </div>
+      <div class="audience-card">
+        <div class="audience-card-icon">🚗</div>
+        <div class="audience-card-title">Интересы</div>
+        <div class="audience-card-value">Автомобили, уход за транспортом, экономия времени</div>
+      </div>
+      <div class="audience-card">
+        <div class="audience-card-icon">🔍</div>
+        <div class="audience-card-title">Ключевые запросы</div>
+        <div class="audience-card-value">«автомойка Домодедово», «мойка рядом», «химчистка салона»</div>
+      </div>
+    </div>
+
+    <div class="pain-list fade-in">
+      <div class="pain-item">
+        <span class="pain-num">01</span>
+        <div class="pain-text">
+          <strong>Нехватка времени</strong>
+          Занятые люди хотят быстро записаться без звонков и очередей
+        </div>
+      </div>
+      <div class="pain-item">
+        <span class="pain-num">02</span>
+        <div class="pain-text">
+          <strong>Страх некачественного сервиса</strong>
+          Боятся доверить машину непроверенной мойке
+        </div>
+      </div>
+      <div class="pain-item">
+        <span class="pain-num">03</span>
+        <div class="pain-text">
+          <strong>Сложность выбора</strong>
+          Много моек рядом — непонятно, какую выбрать
+        </div>
+      </div>
+      <div class="pain-item">
+        <span class="pain-num">04</span>
+        <div class="pain-text">
+          <strong>Цена vs качество</strong>
+          Хотят достойное качество по разумной цене
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- СРЕДСТВА ПРОДВИЖЕНИЯ -->
+  <section id="promotion">
+    <p class="section-label fade-in">Как продвигается реклама</p>
+    <h2 class="section-title fade-in">Средства продвижения</h2>
+    <div class="section-divider fade-in"></div>
+
+    <div class="promo-grid fade-in">
+      <div class="promo-card">
+        <span class="promo-card-num">01</span>
+        <span class="promo-card-tag">Аналитика</span>
+        <h3 class="promo-card-title">Яндекс Метрика</h3>
+        <p class="promo-card-desc">Инструмент веб-аналитики, подключённый к данному сайту. Позволяет отслеживать поведение посетителей в реальном времени.</p>
+        <ul>
+          <li>Количество и источники визитов</li>
+          <li>Глубина просмотра и время на сайте</li>
+          <li>Карта кликов и вебвизор</li>
+          <li>Показатель отказов</li>
+        </ul>
+      </div>
+
+      <div class="promo-card">
+        <span class="promo-card-num">02</span>
+        <span class="promo-card-tag">Локальное продвижение</span>
+        <h3 class="promo-card-title">Яндекс Бизнес</h3>
+        <p class="promo-card-desc">Размещение автомойки на Яндекс Картах с карточкой компании. Охватывает пользователей, которые ищут мойку «рядом».</p>
+        <ul>
+          <li>Карточка с адресом, фото, отзывами</li>
+          <li>Показ в поиске по гео-запросам</li>
+          <li>Кнопка «Записаться онлайн»</li>
+          <li>Статистика звонков и переходов</li>
+        </ul>
+      </div>
+
+      <div class="promo-card">
+        <span class="promo-card-num">03</span>
+        <span class="promo-card-tag">Контекстная реклама</span>
+        <h3 class="promo-card-title">Яндекс Директ</h3>
+        <p class="promo-card-desc">Показ рекламного объявления пользователям, которые вводят целевые запросы в Яндексе. Оплата за клик.</p>
+        <ul>
+          <li>Ключевые слова: «автомойка Домодедово», «мойка рядом»</li>
+          <li>Гео-таргетинг: радиус 10 км</li>
+          <li>Ретаргетинг по посетителям сайта</li>
+          <li>Медийная реклама с видеороликом</li>
+        </ul>
+      </div>
+
+      <div class="promo-card">
+        <span class="promo-card-num">04</span>
+        <span class="promo-card-tag">Сайт</span>
+        <h3 class="promo-card-title">Одностраничный сайт</h3>
+        <p class="promo-card-desc">Данный сайт служит посадочной страницей рекламной кампании. Размещён на GitHub Pages — бесплатный хостинг со своим URL.</p>
+        <ul>
+          <li>Видеоролик встроен на главной странице</li>
+          <li>Описание проекта и целевой аудитории</li>
+          <li>Подключена Яндекс Метрика</li>
+          <li>Адаптирован под мобильные устройства</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">Мой<span>Додыр</span> · Рекламный проект</div>
+    <div class="footer-right">Цифровые коммуникации · РГГУ · 2026</div>
+  </footer>
+
+  <script>
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
